@@ -14,7 +14,7 @@ public class Main extends Application {
         loader.setController(new HomeController());
         Parent root = loader.load();
         primaryStage.setTitle("JavaShop");
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 1000, 800);
         scene.getStylesheets().addAll(this.getClass().getResource("resources/css/main.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

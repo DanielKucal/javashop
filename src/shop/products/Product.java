@@ -14,8 +14,23 @@ public abstract class Product {
     String name = "Undefined";
     Image image = null;
     Price price = null;
-    String brand = "unknown";
+    String brand = "unknown company";
     Color color = null;
+
+    Product(){ }
+
+    Product(String name){
+        this();
+        this.name = name;
+    }
+
+    @Override
+    public String toString(){
+        return this.getClass().getSimpleName()
+                + " " + this.getName()
+                + " (" + this.getColor() + " "
+                + this.getBrand() + ")";
+    }
 
     /**
      * Get product's name
@@ -103,8 +118,11 @@ public abstract class Product {
      * Get product's color
      * @return color
      */
-    public Color getColor() {
-        return color;
+    public String getColor() {
+        if (color != null)
+            return color.toString();
+        else
+            return "";
     }
 
     /**
