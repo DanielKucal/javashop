@@ -11,11 +11,11 @@ import shop.products.parameters.Price;
  * www: danielkucal.com
  */
 public abstract class Product {
-    String name = "Undefined";
-    Image image = null;
-    Price price = null;
-    String brand = "unknown company";
-    Color color = null;
+    private String name = "Undefined";
+    private Image image = null;
+    private Price price = null;
+    private String brand = "unknown company";
+    private Color color = null;
 
     Product(){ }
 
@@ -43,11 +43,9 @@ public abstract class Product {
     /**
      * Set product's image
      * @param name new name for product
-     * @return this
      */
-    public Product setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
 
     /**
@@ -61,11 +59,9 @@ public abstract class Product {
     /**
      * Set product's image
      * @param image new image for product
-     * @return this
      */
-    public Product setImage(Image image) {
+    public void setImage(Image image) {
         this.image = image;
-        return this;
     }
 
     /**
@@ -79,21 +75,17 @@ public abstract class Product {
     /**
      * Set product's final price
      * @param price new price for product
-     * @return this
      */
-    public Product setPrice(double price) {
+    public void setPrice(double price) {
         this.price = new Price(price, true);
-        return this;
     }
 
     /**
      * Set product's net price
      * @param price new net price for product
-     * @return this
      */
-    public Product setNetPrice(double price) {
+    public void setNetPrice(double price) {
         this.price = new Price(price);
-        return this;
     }
 
     /**
@@ -107,11 +99,9 @@ public abstract class Product {
     /**
      * Set product's brand
      * @param brand new brand for product
-     * @return this
      */
-    public Product setBrand(String brand) {
+    public void setBrand(String brand) {
         this.brand = brand;
-        return this;
     }
 
     /**
@@ -128,10 +118,8 @@ public abstract class Product {
     /**
      * Set product's color
      * @param color new color for product
-     * @return this
      */
-    public Product setColor(Color color) {
+    public void setColor(Color color) {
         this.color = color;
-        return this;
     }
 }

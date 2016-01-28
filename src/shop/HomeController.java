@@ -1,14 +1,14 @@
 package shop;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -31,19 +31,12 @@ public class HomeController implements Initializable {
     @FXML private AnchorPane content;
     @FXML private HBox buttonContainer;
     @FXML private TextField searchInput;
-    private Catalog catalog = Catalog.getInstance();
+    private ArrayList<Product> catalog = Catalog.getProducts();
     private ListView<Product> listView = new ListView<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
         this.setContent(new Text("test"));
-
-       /* TextField searchText = new TextField();
-        searchText.setId("searchInput");
-        searchText.setPromptText("Filter results");
-        Button searchButton = new Button("Search");
-        buttonContainer.getChildren().add(searchText);
-        buttonContainer.getChildren().add(searchButton);*/
     }
 
     public HomeController setContent(Node content){
@@ -105,5 +98,10 @@ public class HomeController implements Initializable {
         ArrayList<Product> results = new ArrayList<>(catalog);
         results.removeIf(product -> !product.toString().toLowerCase().contains(searchText));
         listView.setItems(FXCollections.observableArrayList(results));
+    }
+
+    @FXML
+    public void saveProducts(){
+        Catalog.save();
     }
 }
