@@ -3,6 +3,7 @@ package shop;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -16,6 +17,7 @@ import shop.products.Jacket;
 import shop.products.Product;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -28,6 +30,7 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable {
     @FXML private AnchorPane content;
     @FXML private HBox buttonContainer;
+    @FXML private TextField searchInput;
     private Catalog catalog = Catalog.getInstance();
     private ListView<Product> listView = new ListView<>();
 
@@ -94,5 +97,13 @@ public class HomeController implements Initializable {
     public void removeProduct(){
         catalog.remove(listView.getSelectionModel().getSelectedItem());
         this.openProducts();
+    }
+
+    @FXML
+    public void filterResults(){
+        String searchText = searchInput.getText().toLowerCase();
+        ArrayList<Product> results = new ArrayList<>(catalog);
+        results.removeIf(product -> !product.toString().toLowerCase().contains(searchText));
+        listView.setItems(FXCollections.observableArrayList(results));
     }
 }

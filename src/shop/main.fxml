@@ -75,8 +75,8 @@
                          <StackPane id="logo" fx:id="logo" prefHeight="100.0" prefWidth="250.0" />
                          <HBox id="buttonContainer" fx:id="buttonContainer" alignment="CENTER_RIGHT" layoutX="317.0" maxWidth="850.0" prefHeight="100.0" prefWidth="666.0" AnchorPane.rightAnchor="17.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <TextField fx:id="searchInput" promptText="Filter results" />
-                              <Button mnemonicParsing="false" text="Search" />
+                              <TextField fx:id="searchInput" onKeyReleased="#filterResults" promptText="Filter results" />
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#filterResults" text="Search" />
                            </children></HBox>
                      </children>
                   </AnchorPane>

@@ -28,7 +28,7 @@ public abstract class Product {
     public String toString(){
         return this.getClass().getSimpleName()
                 + " " + this.getName()
-                + " (" + this.getColor() + " "
+                + " (" + this.getColor() + ", "
                 + this.getBrand() + ")";
     }
 
@@ -122,7 +122,7 @@ public abstract class Product {
         if (color != null)
             return color.toString();
         else
-            return "";
+            return "undefined color";
     }
 
     /**
