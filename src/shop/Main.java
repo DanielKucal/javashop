@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("main.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("view/main.fxml"));
         loader.setController(new HomeController());
         Parent root = loader.load();
         primaryStage.setTitle("JavaShop");
