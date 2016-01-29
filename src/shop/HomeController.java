@@ -3,6 +3,7 @@ package shop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
@@ -16,6 +17,7 @@ import shop.products.Catalog;
 import shop.products.Jacket;
 import shop.products.Product;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -28,9 +30,8 @@ import java.util.ResourceBundle;
  *         www: danielkucal.com
  */
 public class HomeController implements Initializable {
-    @FXML private AnchorPane content;
-    @FXML private HBox buttonContainer;
-    @FXML private TextField searchInput;
+    @FXML AnchorPane content;
+    @FXML TextField searchInput;
     private ArrayList<Product> catalog = Catalog.getProducts();
     private ListView<Product> listView = new ListView<>();
 
@@ -79,11 +80,21 @@ public class HomeController implements Initializable {
 
     @FXML
     public void addProduct(){
-        System.out.println("dodano produkt");
+        /*System.out.println("dodano produkt");
         Product p = new Jacket();
         p.setName("Kurtka");
         catalog.add(p);
-        this.openProducts();
+        this.openProducts();*/
+        AnchorPane editProduct;
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("view/editProduct.fxml"));
+        try {
+            editProduct = fxmlLoader.load();
+        } catch(IOException e) {
+            System.out.println("Can not load view/editProduct.fxml:");
+            System.err.println(e.getMessage());
+            editProduct = new AnchorPane();
+        }
+        this.setContent(editProduct, true);
     }
 
     @FXML
@@ -98,6 +109,7 @@ public class HomeController implements Initializable {
         ArrayList<Product> results = new ArrayList<>(catalog);
         results.removeIf(product -> !product.toString().toLowerCase().contains(searchText));
         listView.setItems(FXCollections.observableArrayList(results));
+        this.openProducts();
     }
 
     @FXML
