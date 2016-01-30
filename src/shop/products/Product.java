@@ -12,7 +12,7 @@ import shop.products.parameters.Price;
 public abstract class Product {
     private String name = "Undefined";
     private Image image = null;
-    private Price price = null;
+    private Price price = new Price();
     private String brand = "unknown company";
     private String color = null;
     private int id;
