@@ -10,9 +10,13 @@ import java.math.RoundingMode;
  * www: danielkucal.com
  */
 public class Price {
-    double netAmount = 0.00;
-    double tax = 0.23;
-    Currency currency = Currency.EUR;
+    private double netAmount = 0.00;
+    private double tax = 0.23;
+    private Currency currency = Currency.EUR;
+
+    public Price(){
+
+    }
 
     /**
      * Create price from net value
@@ -25,10 +29,10 @@ public class Price {
     /**
      * Create price
      * @param price price
-     * @param taxed is given price taxed?
+     * @param addTax should given price be taxed?
      */
-    public Price(double price, boolean taxed){
-        if(taxed){
+    public Price(double price, boolean addTax){
+        if(!addTax){
             this.setNetAmount(price / (1.00+tax));
         } else {
             this.setNetAmount(price);
@@ -44,18 +48,17 @@ public class Price {
     }
 
     public double getFinalPrice(){
-        return this.getNetAmount() * (1.00+this.getTax());
+        return round(this.getNetAmount() * (1.00+this.getTax()), 2);
     }
 
     public double getNetAmount() {
-        return round(netAmount, 2);
+        return netAmount;
     }
 
-    public Price setNetAmount(double netAmount) {
+    public void setNetAmount(double netAmount) {
         if(netAmount < 0) throw new IllegalArgumentException();
 
         this.netAmount = netAmount;
-        return this;
     }
 
     public double getTax() {
@@ -73,9 +76,8 @@ public class Price {
         return currency;
     }
 
-    public Price setCurrency(Currency currency) {
+    public void setCurrency(Currency currency) {
         this.currency = currency;
-        return this;
     }
 
     public static double round(double value, int places) {
