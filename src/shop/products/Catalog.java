@@ -74,7 +74,7 @@ public class Catalog {
         return lastProductId;
     }
 
-    public static void increaseProductsCount(){
+    public static void increaseLastProductId(){
         lastProductId++;
     }
 }

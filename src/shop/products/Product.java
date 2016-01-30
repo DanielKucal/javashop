@@ -1,7 +1,6 @@
 package shop.products;
 
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import shop.products.parameters.Price;
 
 /**
@@ -15,9 +14,13 @@ public abstract class Product {
     private Image image = null;
     private Price price = null;
     private String brand = "unknown company";
-    private Color color = null;
+    private String color = null;
+    private int id;
 
-    Product(){ }
+    Product(){
+        this.setId(Catalog.getLastProductId());
+        Catalog.increaseLastProductId();
+    }
 
     Product(String name){
         this();
@@ -27,9 +30,9 @@ public abstract class Product {
     @Override
     public String toString(){
         return this.getClass().getSimpleName()
+                + " " + this.getBrand()
                 + " " + this.getName()
-                + " (" + this.getColor() + ", "
-                + this.getBrand() + ")";
+                + " [" + this.getPrice() + "]";
     }
 
     /**
@@ -73,19 +76,11 @@ public abstract class Product {
     }
 
     /**
-     * Set product's final price
+     * Set product's price
      * @param price new price for product
      */
-    public void setPrice(double price) {
-        this.price = new Price(price, true);
-    }
-
-    /**
-     * Set product's net price
-     * @param price new net price for product
-     */
-    public void setNetPrice(double price) {
-        this.price = new Price(price);
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     /**
@@ -109,17 +104,22 @@ public abstract class Product {
      * @return color
      */
     public String getColor() {
-        if (color != null)
-            return color.toString();
-        else
-            return "undefined color";
+        return this.color;
     }
 
     /**
      * Set product's color
      * @param color new color for product
      */
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
