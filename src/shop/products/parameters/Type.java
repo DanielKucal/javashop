@@ -8,5 +8,5 @@ package shop.products.parameters;
  *         www: danielkucal.com
  */
 public enum Type {
-    Jacket, Pants, Shirt, Shoes, TShirt, Other
+    Jacket, Pants, Shirt, Shoes, TShirt
 }
