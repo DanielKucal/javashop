@@ -16,6 +16,7 @@ public class Catalog {
     private static String fileName = "src/shop/resources/xml/catalog.xml";
     private static ArrayList<Product> products = null;
     private static boolean loaded = false;
+    private static int lastProductId = 0;
 
     public static ArrayList<Product> getProducts(){
         if(!loaded) {
@@ -35,6 +36,7 @@ public class Catalog {
                     )
             );
             products = (ArrayList<Product>) decoder.readObject();
+            lastProductId = products.get(products.size()-1).getId();
         } catch (Exception e) {
             System.out.println("Can not read saved catalog data. Empty catalog instance will be used instead.");
             products = new ArrayList<>();
@@ -66,5 +68,13 @@ public class Catalog {
     public static ArrayList<Product> setProducts(ArrayList<Product> newProducts) {
         products = newProducts;
         return products;
+    }
+
+    public static int getLastProductId(){
+        return lastProductId;
+    }
+
+    public static void increaseProductsCount(){
+        lastProductId++;
     }
 }
