@@ -47,7 +47,7 @@ public class Price {
         return this.getFullPrice();
     }
 
-    public double getFinalPrice(){
+    public Double getFinalPrice(){
         return round(this.getNetAmount() * (1.00+this.getTax()), 2);
     }
 
