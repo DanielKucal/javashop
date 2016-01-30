@@ -2,8 +2,11 @@ package shop.products;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.TreeMap;
 
 /**
  * Created on 2016-01-27
@@ -14,11 +17,11 @@ import java.util.ArrayList;
  */
 public class Catalog {
     private static String fileName = "src/shop/resources/xml/catalog.xml";
-    private static ArrayList<Product> products = null;
+    private static TreeMap<Integer, Product> products = null;
     private static boolean loaded = false;
-    private static int lastProductId = 0;
+    private static Integer lastProductId = 0;
 
-    public static ArrayList<Product> getProducts(){
+    public static TreeMap<Integer, Product> getProducts(){
         if(!loaded) {
             load();
             loaded = true;
@@ -35,11 +38,12 @@ public class Catalog {
                             new FileInputStream(getFileName())
                     )
             );
-            products = (ArrayList<Product>) decoder.readObject();
-            lastProductId = products.get(products.size()-1).getId();
+            products = (TreeMap<Integer, Product>) decoder.readObject();
+            lastProductId = products.lastEntry().getValue().getId()+1; //products.get(products.size()-1).getId();
         } catch (Exception e) {
             System.out.println("Can not read saved catalog data. Empty catalog instance will be used instead.");
-            products = new ArrayList<>();
+            e.printStackTrace();
+            products = new TreeMap<>();
         }
     }
 
@@ -65,7 +69,7 @@ public class Catalog {
         Catalog.fileName = fileName;
     }
 
-    public static ArrayList<Product> setProducts(ArrayList<Product> newProducts) {
+    public static TreeMap<Integer, Product> setProducts(TreeMap<Integer, Product> newProducts) {
         products = newProducts;
         return products;
     }
@@ -76,5 +80,21 @@ public class Catalog {
 
     public static void increaseLastProductId(){
         lastProductId++;
+    }
+
+    public static void add(Product p){
+        products.put(p.getId(), p);
+    }
+
+    public static void remove(Integer i){
+        products.remove(i);
+    }
+
+    public static void remove(Product p){
+        remove(p.getId());
+    }
+
+    public static void set(Product p){
+        products.replace(p.getId(), p);
     }
 }
