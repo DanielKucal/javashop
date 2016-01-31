@@ -7,5 +7,5 @@ package shop.products.parameters;
  * www: danielkucal.com
  */
 public enum Material {
-    UNKNOWN, NYLON, LEATHER, WOOL, COTTON
+    UNKNOWN, NYLON, LEATHER, WOOL, COTTON, FLEECE
 }
