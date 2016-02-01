@@ -93,7 +93,7 @@ public class HomeController implements Initializable {
 
     public void openEditForm(){
         AnchorPane editProduct;
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("view/editProduct.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/editProduct.fxml"));
         try {
             editProduct = fxmlLoader.load();
         } catch(IOException e) {
