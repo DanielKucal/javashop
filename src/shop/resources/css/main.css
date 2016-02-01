@@ -41,3 +41,11 @@
     -fx-fill: white;
     -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
 }
+
+.input {
+    -fx-pref-height: 35;
+    -fx-pref-width: 315;
+    -fx-max-width: 315;
+    -fx-min-width: 315;
+}
+
