@@ -17,11 +17,10 @@ public abstract class Product {
     private String brand = "unknown company";
     private String color = null;
     private Gender gender = Gender.UNISEX;
-    private int id;
+    private Integer id;
 
     Product(){
-        this.setId(Catalog.getLastProductId());
-        Catalog.increaseLastProductId();
+
     }
 
     Product(String name){
@@ -117,11 +116,11 @@ public abstract class Product {
         this.color = color;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

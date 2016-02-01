@@ -18,7 +18,7 @@ import java.util.TreeMap;
 public class Catalog {
     private static String fileName = "src/shop/resources/xml/catalog.xml";
     private static TreeMap<Integer, Product> products = null;
-    private static boolean loaded = false;
+    private static Boolean loaded = false;
     private static Integer lastProductId = 0;
 
     public static TreeMap<Integer, Product> getProducts(){
@@ -83,6 +83,8 @@ public class Catalog {
     }
 
     public static void add(Product p){
+        p.setId(Catalog.getLastProductId());
+        Catalog.increaseLastProductId();
         products.put(p.getId(), p);
     }
 
@@ -94,7 +96,10 @@ public class Catalog {
         remove(p.getId());
     }
 
-    public static void set(Product p){
+    public static void set(Product p) {
+        if (p.getId() == 0) {
+            throw new IllegalArgumentException("This product does not exist in catalog. Use Catalog.add() method instead.");
+        }
         products.replace(p.getId(), p);
     }
 }
