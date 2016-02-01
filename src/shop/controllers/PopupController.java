@@ -1,4 +1,4 @@
-package shop;
+package shop.controllers;
 
 import javafx.scene.control.Alert;
 

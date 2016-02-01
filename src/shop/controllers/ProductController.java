@@ -1,4 +1,4 @@
-package shop;
+package shop.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import shop.Main;
 import shop.products.Catalog;
 import shop.products.Product;
 import shop.products.parameters.Currency;
