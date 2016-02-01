@@ -1,22 +1,23 @@
 package shop.products;
 
-import shop.products.parameters.Material;
+import shop.products.parameters.Size;
 
 /**
- * Created on 2015-11-13
+ * Created on 2016-01-31
+ *
  * @author Daniel Kucal
- * email: dkucal@gmail.com
- * www: danielkucal.com
+ *         email: dkucal@gmail.com
+ *         www: danielkucal.com
  */
-public class TShirt extends Product {
-    Material material = Material.UNKNOWN;
+public class TShirt extends AbstractShirt {
+    private Size size = Size.M;
 
-    public Material getMaterial() {
-        return material;
+    public Size getSize() {
+        return size;
     }
 
-    public TShirt setMaterial(Material material) {
-        this.material = material;
+    public TShirt setSize(Size size) {
+        this.size = size;
         return this;
     }
 }

@@ -57,7 +57,7 @@ public class Catalog {
             encoder.writeObject(products);
             encoder.close();
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

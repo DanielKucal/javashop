@@ -6,8 +6,13 @@ package shop.products;
  * email: dkucal@gmail.com
  * www: danielkucal.com
  */
-public class Shirt extends TShirt {
-    Integer collarSize = 0;
+public class Shirt extends AbstractShirt {
+    private Integer collarSize = 35;
+    private Boolean isTieIncluded = false;
+
+    public Shirt(){
+        super();
+    }
 
     public Integer getCollarSize() {
         return collarSize;
@@ -15,6 +20,15 @@ public class Shirt extends TShirt {
 
     public Shirt setCollarSize(Integer collarSize) {
         this.collarSize = collarSize;
+        return this;
+    }
+
+    public Boolean getTieIncluded() {
+        return isTieIncluded;
+    }
+
+    public Shirt setTieIncluded(Boolean tieIncluded) {
+        isTieIncluded = tieIncluded;
         return this;
     }
 }

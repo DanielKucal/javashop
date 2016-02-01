@@ -1,6 +1,7 @@
 package shop.products;
 
 import javafx.scene.image.Image;
+import shop.products.parameters.Gender;
 import shop.products.parameters.Price;
 
 /**
@@ -15,6 +16,7 @@ public abstract class Product {
     private Price price = new Price();
     private String brand = "unknown company";
     private String color = null;
+    private Gender gender = Gender.UNISEX;
     private int id;
 
     Product(){
@@ -121,5 +123,13 @@ public abstract class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }
