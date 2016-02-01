@@ -117,7 +117,6 @@ public class HomeController implements Initializable {
         ArrayList<Product> results = new ArrayList<>(Catalog.getProducts().values());
         results.removeIf(product -> !product.toString().toLowerCase().contains(searchText));
         listView.setItems(FXCollections.observableArrayList(results));
-        this.openProducts();
     }
 
     @FXML
