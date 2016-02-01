@@ -118,7 +118,6 @@ public class ProductController implements Initializable {
                 e.printStackTrace();
             }
         }
-
     }
 
     @FXML
@@ -147,11 +146,7 @@ public class ProductController implements Initializable {
             this.product = null;
             HomeController.getInstance().openProducts();
         } catch(Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("We got a problem!");
-            alert.setHeaderText("Ooops, something went wrong...");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            PopupController.alert(null, null, e.getMessage());
             e.printStackTrace();
         }
     }
@@ -176,6 +171,4 @@ public class ProductController implements Initializable {
             return "";
         }
     }
-
-
 }
