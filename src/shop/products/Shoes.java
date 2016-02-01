@@ -11,7 +11,7 @@ import shop.products.parameters.Promotion;
  */
 public class Shoes extends Product implements Promotional {
     private Boolean hasHeel = false;
-    private Integer size;
+    private Integer sizeNum;
     private Promotion promotion;
 
     public Boolean getHasHeel() {
@@ -23,13 +23,13 @@ public class Shoes extends Product implements Promotional {
         return this;
     }
 
-    public Integer getSize() {
-        return size;
+    public Integer getSizeNum() {
+        return sizeNum;
     }
 
-    public Shoes setSize(Integer size) {
-        if(size < 10 || size > 50) throw new IllegalArgumentException("Shoe size must be between 10-50");
-        this.size = size;
+    public Shoes setSizeNum(Integer sizeNum) {
+        if(sizeNum < 10 || sizeNum > 50) throw new IllegalArgumentException("Shoe size must be between 10-50");
+        this.sizeNum = sizeNum;
         return this;
     }
 
