@@ -1,6 +1,7 @@
 package shop.products;
 
 import shop.products.parameters.ClaspType;
+import shop.products.parameters.Season;
 import shop.products.parameters.Size;
 
 /**
@@ -10,8 +11,9 @@ import shop.products.parameters.Size;
  * www: danielkucal.com
  */
 public class Jacket extends Product {
-    private Size size = Size.M;
-    private ClaspType clasp = ClaspType.Zip;
+    private Size size;
+    private ClaspType clasp;
+    private Season season;
 
     public Jacket(){
         super();
@@ -32,6 +34,15 @@ public class Jacket extends Product {
 
     public Jacket setClasp(ClaspType clasp) {
         this.clasp = clasp;
+        return this;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public Jacket setSeason(Season season) {
+        this.season = season;
         return this;
     }
 }
