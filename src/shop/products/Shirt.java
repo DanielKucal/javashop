@@ -7,7 +7,7 @@ package shop.products;
  * www: danielkucal.com
  */
 public class Shirt extends AbstractShirt {
-    private Integer collarSize = 35;
+    private Integer collarSize;
     private Boolean isTieIncluded = false;
 
     public Shirt(){

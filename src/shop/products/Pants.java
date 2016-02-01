@@ -12,8 +12,8 @@ import shop.products.parameters.Promotion;
  * www: danielkucal.com
  */
 public class Pants extends Product implements Promotional, Materialized {
-    private Integer width = 32;
-    private Integer height = 32;
+    private Integer width;
+    private Integer height;
     private Promotion promotion;
     private Material material;
 

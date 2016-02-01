@@ -10,7 +10,7 @@ import shop.products.parameters.Material;
  * www: danielkucal.com
  */
 public abstract class AbstractShirt extends Product implements Materialized {
-    private Material material = Material.UNKNOWN;
+    private Material material;
 
     public AbstractShirt(){
         super();
