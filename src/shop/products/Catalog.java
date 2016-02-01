@@ -16,7 +16,7 @@ import java.util.TreeMap;
  *         www: danielkucal.com
  */
 public class Catalog {
-    private static String fileName = "src/shop/resources/xml/catalog.xml";
+    private static final String fileName = "src/shop/resources/xml/catalog.xml";
     private static TreeMap<Integer, Product> products = null;
     private static Boolean loaded = false;
     private static Integer lastProductId = 0;
@@ -65,10 +65,6 @@ public class Catalog {
         return fileName;
     }
 
-    public static void setFileName(String fileName) {
-        Catalog.fileName = fileName;
-    }
-
     public static TreeMap<Integer, Product> setProducts(TreeMap<Integer, Product> newProducts) {
         products = newProducts;
         return products;
@@ -97,8 +93,9 @@ public class Catalog {
     }
 
     public static void set(Product p) {
-        if (p.getId() == 0) {
-            throw new IllegalArgumentException("This product does not exist in catalog. Use Catalog.add() method instead.");
+        if (p.getId() == 0 || p.getId() == null) {
+            add(p);
+            return;
         }
         products.replace(p.getId(), p);
     }
