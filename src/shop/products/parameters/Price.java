@@ -39,6 +39,17 @@ public class Price {
         }
     }
 
+    /**
+     * Create price
+     * @param price price
+     * @param addTax should given price be taxed?
+     * @param currency price currency
+     */
+    public Price(Double price, Boolean addTax, Currency currency){
+        this(price, addTax);
+        this.currency = currency;
+    }
+
     public String getFullPrice(){
         return this.getFinalPrice() + " " + this.getCurrency().toString();
     }
