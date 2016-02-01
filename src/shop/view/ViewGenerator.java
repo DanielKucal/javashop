@@ -1,12 +1,10 @@
 package shop.view;
 
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import shop.interfaces.Materialized;
 import shop.interfaces.Promotional;
-import shop.interfaces.Sizeable;
+import shop.interfaces.Resizeable;
 import shop.products.*;
 import shop.products.parameters.*;
 
@@ -43,13 +41,13 @@ public class ViewGenerator {
             }
             list.add(material);
         }
-        if (this.getProduct() instanceof Sizeable) {
+        if (this.getProduct() instanceof Resizeable) {
             ComboBox<Size> size = new StyledComboBox<>();
             size.setPromptText("Size");
             size.getItems().setAll(Size.values());
             if (fill) {
-                Sizeable sizeable = (Sizeable) product;
-                size.setValue(sizeable.getSize());
+                Resizeable resizeable = (Resizeable) product;
+                size.setValue(resizeable.getSize());
             }
             list.add(size);
         }

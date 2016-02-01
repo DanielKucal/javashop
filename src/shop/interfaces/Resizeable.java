@@ -9,7 +9,7 @@ import shop.products.parameters.Size;
  *         email: dkucal@gmail.com
  *         www: danielkucal.com
  */
-public interface Sizeable {
+public interface Resizeable {
     Size getSize();
-    Sizeable setSize(Size size);
+    Resizeable setSize(Size size);
 }

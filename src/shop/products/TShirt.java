@@ -1,6 +1,6 @@
 package shop.products;
 
-import shop.interfaces.Sizeable;
+import shop.interfaces.Resizeable;
 import shop.products.parameters.Size;
 
 /**
@@ -10,7 +10,7 @@ import shop.products.parameters.Size;
  *         email: dkucal@gmail.com
  *         www: danielkucal.com
  */
-public class TShirt extends AbstractShirt implements Sizeable {
+public class TShirt extends AbstractShirt implements Resizeable {
     private Size size;
 
     public Size getSize() {
