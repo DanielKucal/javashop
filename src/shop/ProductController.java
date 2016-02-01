@@ -5,13 +5,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import shop.interfaces.Materialized;
-import shop.interfaces.Promotional;
-import shop.interfaces.Sizeable;
-import shop.products.*;
-import shop.products.parameters.*;
+import shop.products.Catalog;
+import shop.products.Product;
+import shop.products.parameters.Currency;
+import shop.products.parameters.Gender;
+import shop.products.parameters.Price;
+import shop.products.parameters.Type;
+import shop.view.ViewGenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -88,69 +89,15 @@ public class ProductController implements Initializable {
         productGender.setValue(product.getGender());
         if(product.getColor() != null)
             productColor.setValue(Color.web(product.getColor()));
+        ViewGenerator generator = new ViewGenerator(product);
     }
 
     @FXML
     public void updateForm(){
         System.out.println(productType.getValue());
         additionalForm.getChildren().clear();
-
-        if (this.getProduct() instanceof Materialized) {
-            ComboBox<Material> material = new ComboBox<>();
-            material.setPromptText("Material");
-            material.getItems().setAll(Material.values());
-            additionalForm.getChildren().add(material);
-        }
-        if (this.getProduct() instanceof Sizeable) {
-            ComboBox<Size> size = new ComboBox<>();
-            size.setPromptText("Size");
-            size.getItems().setAll(Size.values());
-            additionalForm.getChildren().add(size);
-        }
-        if (this.getProduct() instanceof Promotional){
-            Text text = new Text("Promotion");
-            TextField discount = new TextField();
-            discount.setPromptText("Discount between 10-70%");
-            DatePicker fromDate = new DatePicker();
-            fromDate.setPromptText("From");
-            DatePicker toDate = new DatePicker();
-            toDate.setPromptText("To");
-            additionalForm.getChildren().addAll(text, discount, fromDate, toDate);
-        }
-
-        switch (productType.getValue()) {
-            case Jacket:
-                ComboBox<ClaspType> clasp = new ComboBox<>();
-                clasp.setPromptText("Clasp type");
-                clasp.getItems().setAll(ClaspType.values());
-                ComboBox<Season> season = new ComboBox<>();
-                season.setPromptText("Season");
-                season.getItems().setAll(Season.values());
-                additionalForm.getChildren().addAll(clasp, season);
-                break;
-
-            case Pants:
-                TextField width = new TextField();
-                width.setPromptText("Width");
-                TextField height = new TextField();
-                height.setPromptText("Height");
-                additionalForm.getChildren().addAll(width, height);
-                break;
-
-            case Shirt:
-                TextField collar = new TextField();
-                collar.setPromptText("Collar size");
-                CheckBox isTieIncluded = new CheckBox("Is tie included?");
-                additionalForm.getChildren().addAll(collar, isTieIncluded);
-                break;
-
-            case Shoes:
-                CheckBox hasHeel = new CheckBox("Has heel?");
-                TextField size = new TextField();
-                size.setPromptText("Size");
-                additionalForm.getChildren().addAll(hasHeel, size);
-                break;
-        }
+        ViewGenerator generator = new ViewGenerator(this.getProduct());
+        additionalForm.getChildren().setAll(generator.generateForm(true));
     }
 
     @FXML
@@ -216,6 +163,7 @@ public class ProductController implements Initializable {
 
         if(getEditedProduct() != null) {
             this.fillFields();
+            this.updateForm();
         }
     }
 
