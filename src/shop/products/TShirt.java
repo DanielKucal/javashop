@@ -1,5 +1,6 @@
 package shop.products;
 
+import shop.interfaces.Sizeable;
 import shop.products.parameters.Size;
 
 /**
@@ -9,8 +10,8 @@ import shop.products.parameters.Size;
  *         email: dkucal@gmail.com
  *         www: danielkucal.com
  */
-public class TShirt extends AbstractShirt {
-    private Size size = Size.M;
+public class TShirt extends AbstractShirt implements Sizeable {
+    private Size size;
 
     public Size getSize() {
         return size;
