@@ -1,5 +1,6 @@
 package shop.products;
 
+import shop.interfaces.Materialized;
 import shop.products.parameters.Material;
 
 /**
@@ -8,7 +9,7 @@ import shop.products.parameters.Material;
  * email: dkucal@gmail.com
  * www: danielkucal.com
  */
-public abstract class AbstractShirt extends Product {
+public abstract class AbstractShirt extends Product implements Materialized {
     private Material material = Material.UNKNOWN;
 
     public AbstractShirt(){
