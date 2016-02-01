@@ -1,5 +1,6 @@
 package shop.products;
 
+import shop.interfaces.Sizeable;
 import shop.products.parameters.ClaspType;
 import shop.products.parameters.Season;
 import shop.products.parameters.Size;
@@ -10,7 +11,7 @@ import shop.products.parameters.Size;
  * email: dkucal@gmail.com
  * www: danielkucal.com
  */
-public class Jacket extends Product {
+public class Jacket extends Product implements Sizeable {
     private Size size;
     private ClaspType clasp;
     private Season season;
