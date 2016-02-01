@@ -12,53 +12,90 @@
    <children>
       <StackPane centerShape="false" prefHeight="372.0" prefWidth="437.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text layoutX="20.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit product" textAlignment="CENTER" wrappingWidth="97.681640625" StackPane.alignment="TOP_CENTER">
+            <Text layoutX="20.0" layoutY="20.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit product" textAlignment="CENTER" wrappingWidth="250.681640625" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="19.0" />
                </StackPane.margin>
+               <font>
+                  <Font name="Colonna MT" size="45.0" />
+               </font>
             </Text>
-            <GridPane alignment="CENTER" prefHeight="514.0" prefWidth="478.0" StackPane.alignment="BOTTOM_CENTER">
+            <GridPane alignment="CENTER" StackPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="0.0" prefWidth="78.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="317.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="176.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="52.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="103.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="103.0" minHeight="0.0" prefHeight="48.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="165.0" minHeight="0.0" prefHeight="74.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="165.0" minHeight="6.0" prefHeight="44.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.0" minHeight="0.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="165.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="165.0" minHeight="0.0" prefHeight="93.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="productName" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="productPrice" promptText="Price" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <ColorPicker fx:id="productColor" editable="true" prefHeight="46.0" prefWidth="312.0" promptText="Color" styleClass="clickable" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextField fx:id="productName" maxWidth="315.0" prefHeight="35.0" prefWidth="315.0" promptText="Name" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="productType" onAction="#updateForm" prefHeight="40.0" prefWidth="315.0" promptText="Choose product type" styleClass="clickable" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <TextField fx:id="productPrice" maxWidth="315.0" prefHeight="35.0" prefWidth="315.0" promptText="Price" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <ColorPicker fx:id="productColor" editable="true" prefHeight="40.0" prefWidth="315.0" promptText="Color" styleClass="clickable" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </ColorPicker>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#save" text="Save this product" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="40.0" prefWidth="180.0" text="Save this product" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <styleClass>
                         <String fx:value="center" />
                         <String fx:value="clickable" />
-                     </styleClass></Button>
-                  <ToggleButton fx:id="productPriceTax" mnemonicParsing="false" styleClass="clickable" text="+tax" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="productType" prefHeight="39.0" prefWidth="315.0" promptText="Choose product type" styleClass="clickable" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="productBrand" promptText="Brand" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <ImageView id="productImage" fitHeight="177.0" fitWidth="176.0" onMousePressed="#pickImage" pickOnBounds="true" styleClass="clickable" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     </styleClass>
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Button>
+                  <ToggleButton fx:id="productPriceTax" maxWidth="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" styleClass="clickable" text="+tax" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin></ToggleButton>
+                  <TextField fx:id="productBrand" maxWidth="180.0" prefHeight="35.0" prefWidth="180.0" promptText="Brand" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin></TextField>
+                  <ImageView id="productImage" fitHeight="180.0" fitWidth="180.0" onMousePressed="#pickImage" pickOnBounds="true" styleClass="clickable" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                      <image>
                         <Image url="@../resources/img/default.jpg" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
                   </ImageView>
-                  <VBox fx:id="additionalForm" prefHeight="55.0" prefWidth="319.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <VBox id="additionalForm" fx:id="additionalForm" alignment="CENTER_RIGHT" prefWidth="320.0" styleClass="form" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="No additional informations needed" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arimo Bold" size="19.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets right="5.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children></VBox>
+                  <ComboBox fx:id="productGender" prefHeight="40.0" prefWidth="180.0" promptText="Gender" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="productPriceCurrency" maxHeight="35.0" prefHeight="35.0" prefWidth="113.0" promptText="Currency" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="70.0" />
+                     </GridPane.margin>
+                  </ComboBox>
                </children>
             </GridPane>
          </children>
