@@ -11,5 +11,5 @@ import shop.products.parameters.Promotion;
  */
 public interface Promotional {
     Promotion getPromotion();
-    Promotional setPromotion(Promotion promotion);
+    void setPromotion(Promotion promotion);
 }

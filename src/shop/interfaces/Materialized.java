@@ -11,5 +11,5 @@ import shop.products.parameters.Material;
  */
 public interface Materialized {
     Material getMaterial();
-    Materialized setMaterial(Material material);
+    void setMaterial(Material material);
 }

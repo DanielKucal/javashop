@@ -24,26 +24,23 @@ public class Jacket extends Product implements Resizeable {
         return size;
     }
 
-    public Jacket setSize(Size size) {
+    public void setSize(Size size) {
         this.size = size;
-        return this;
     }
 
     public ClaspType getClasp() {
         return clasp;
     }
 
-    public Jacket setClasp(ClaspType clasp) {
+    public void setClasp(ClaspType clasp) {
         this.clasp = clasp;
-        return this;
     }
 
     public Season getSeason() {
         return season;
     }
 
-    public Jacket setSeason(Season season) {
+    public void setSeason(Season season) {
         this.season = season;
-        return this;
     }
 }

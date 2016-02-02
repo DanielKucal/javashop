@@ -76,11 +76,10 @@ public class Price {
         return tax;
     }
 
-    public Price setTax(double tax) {
+    public void setTax(double tax) {
         if(tax < 0) throw new IllegalArgumentException();
 
         this.tax = tax;
-        return this;
     }
 
     public Currency getCurrency() {

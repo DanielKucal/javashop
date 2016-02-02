@@ -17,8 +17,7 @@ public class TShirt extends AbstractShirt implements Resizeable {
         return size;
     }
 
-    public TShirt setSize(Size size) {
+    public void setSize(Size size) {
         this.size = size;
-        return this;
     }
 }

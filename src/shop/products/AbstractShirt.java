@@ -20,8 +20,7 @@ public abstract class AbstractShirt extends Product implements Materialized {
         return material;
     }
 
-    public AbstractShirt setMaterial(Material material) {
+    public void setMaterial(Material material) {
         this.material = material;
-        return this;
     }
 }

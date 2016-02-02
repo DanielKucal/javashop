@@ -18,17 +18,15 @@ public class Shirt extends AbstractShirt {
         return collarSize;
     }
 
-    public Shirt setCollarSize(Integer collarSize) {
+    public void setCollarSize(Integer collarSize) {
         this.collarSize = collarSize;
-        return this;
     }
 
     public Boolean getTieIncluded() {
         return isTieIncluded;
     }
 
-    public Shirt setTieIncluded(Boolean tieIncluded) {
+    public void setTieIncluded(Boolean tieIncluded) {
         isTieIncluded = tieIncluded;
-        return this;
     }
 }

@@ -21,18 +21,16 @@ public class Pants extends Product implements Promotional, Materialized {
         return width;
     }
 
-    public Pants setWidth(Integer width) {
+    public void setWidth(Integer width) {
         this.width = width;
-        return this;
     }
 
     public Integer getHeight() {
         return height;
     }
 
-    public Pants setHeight(Integer height) {
+    public void setHeight(Integer height) {
         this.height = height;
-        return this;
     }
 
     @Override
@@ -41,9 +39,8 @@ public class Pants extends Product implements Promotional, Materialized {
     }
 
     @Override
-    public Pants setPromotion(Promotion promotion) {
+    public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
-        return this;
     }
 
     @Override
@@ -52,8 +49,7 @@ public class Pants extends Product implements Promotional, Materialized {
     }
 
     @Override
-    public Pants setMaterial(Material material) {
+    public void setMaterial(Material material) {
         this.material = material;
-        return this;
     }
 }

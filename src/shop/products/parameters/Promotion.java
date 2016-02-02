@@ -28,27 +28,24 @@ public class Promotion {
         return discount;
     }
 
-    public Promotion setDiscount(Integer discount) {
+    public void setDiscount(Integer discount) {
         if(discount < 10 || discount > 70) throw new IllegalArgumentException("Discount must be between 10-70%");
         this.discount = discount;
-        return this;
     }
 
     public LocalDate getDateFrom() {
         return dateFrom;
     }
 
-    public Promotion setDateFrom(LocalDate dateFrom) {
+    public void setDateFrom(LocalDate dateFrom) {
         this.dateFrom = dateFrom;
-        return this;
     }
 
     public LocalDate getDateTo() {
         return dateTo;
     }
 
-    public Promotion setDateTo(LocalDate dateTo) {
+    public void setDateTo(LocalDate dateTo) {
         this.dateTo = dateTo;
-        return this;
     }
 }

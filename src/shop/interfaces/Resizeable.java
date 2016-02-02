@@ -11,5 +11,5 @@ import shop.products.parameters.Size;
  */
 public interface Resizeable {
     Size getSize();
-    Resizeable setSize(Size size);
+    void setSize(Size size);
 }

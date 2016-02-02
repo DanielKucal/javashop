@@ -18,19 +18,17 @@ public class Shoes extends Product implements Promotional {
         return hasHeel;
     }
 
-    public Shoes setHasHeel(Boolean hasHeel) {
+    public void setHasHeel(Boolean hasHeel) {
         this.hasHeel = hasHeel;
-        return this;
     }
 
     public Integer getSizeNum() {
         return sizeNum;
     }
 
-    public Shoes setSizeNum(Integer sizeNum) {
+    public void setSizeNum(Integer sizeNum) {
         if(sizeNum < 10 || sizeNum > 50) throw new IllegalArgumentException("Shoe size must be between 10-50");
         this.sizeNum = sizeNum;
-        return this;
     }
 
     @Override
@@ -39,8 +37,7 @@ public class Shoes extends Product implements Promotional {
     }
 
     @Override
-    public Shoes setPromotion(Promotion promotion) {
+    public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
-        return this;
     }
 }
