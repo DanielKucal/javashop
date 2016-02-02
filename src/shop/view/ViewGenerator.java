@@ -1,6 +1,5 @@
 package shop.view;
 
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import shop.interfaces.Materialized;
 import shop.interfaces.Promotional;
@@ -8,7 +7,8 @@ import shop.interfaces.Resizeable;
 import shop.products.*;
 import shop.products.parameters.*;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created on 2016-02-01
@@ -24,12 +24,12 @@ public class ViewGenerator {
         this.product = product;
     }
 
-    public ArrayList<Node> generateForm(){
+    public HashMap<String, Control> generateForm(){
         return this.generateForm(false);
     }
 
-    public ArrayList<Node> generateForm(Boolean fill){
-        ArrayList<Node> list = new ArrayList<>();
+    public LinkedHashMap<String, Control> generateForm(Boolean fill){
+        LinkedHashMap<String, Control> list = new LinkedHashMap<>();
 
         if (this.getProduct() instanceof Materialized) {
             ComboBox<Material> material = new StyledComboBox<>();
@@ -39,7 +39,7 @@ public class ViewGenerator {
                 Materialized materialized = (Materialized) product;
                 material.setValue(materialized.getMaterial());
             }
-            list.add(material);
+            list.put("productMaterial", material);
         }
         if (this.getProduct() instanceof Resizeable) {
             ComboBox<Size> size = new StyledComboBox<>();
@@ -49,7 +49,7 @@ public class ViewGenerator {
                 Resizeable resizeable = (Resizeable) product;
                 size.setValue(resizeable.getSize());
             }
-            list.add(size);
+            list.put("productSize", size);
         }
         if (this.getProduct() instanceof Promotional){
             TextField discount = new StyledTextField();
@@ -68,9 +68,9 @@ public class ViewGenerator {
                     toDate.setValue(promotion.getDateTo());
                 }
             }
-            list.add(discount);
-            list.add(fromDate);
-            list.add(toDate);
+            list.put("productPromotionDiscount", discount);
+            list.put("productPromotionDateFrom", fromDate);
+            list.put("productPromotionDateTo", toDate);
         }
 
         switch (Type.valueOf(product.getClass().getSimpleName())) {
@@ -86,8 +86,8 @@ public class ViewGenerator {
                     clasp.setValue(jacket.getClasp());
                     season.setValue(jacket.getSeason());
                 }
-                list.add(clasp);
-                list.add(season);
+                list.put("productClasp", clasp);
+                list.put("productSeason", season);
                 break;
 
             case Pants:
@@ -102,8 +102,8 @@ public class ViewGenerator {
                     if (pants.getHeight() != null)
                     height.setText(pants.getHeight().toString());
                 }
-                list.add(width);
-                list.add(height);
+                list.put("productWidth", width);
+                list.put("productHeight", height);
                 break;
 
             case Shirt:
@@ -116,8 +116,8 @@ public class ViewGenerator {
                         collar.setText(shirt.getCollarSize().toString());
                     isTieIncluded.setSelected(shirt.getTieIncluded());
                 }
-                list.add(collar);
-                list.add(isTieIncluded);
+                list.put("productCollar", collar);
+                list.put("productTie", isTieIncluded);
                 break;
 
             case Shoes:
@@ -127,11 +127,11 @@ public class ViewGenerator {
                 if (fill) {
                     Shoes shoes = (Shoes) product;
                     hasHeel.setSelected(shoes.getHasHeel());
-                    if (shoes.getSize() != null)
-                        size.setText(shoes.getSize().toString());
+                    if (shoes.getSizeNum() != null)
+                        size.setText(shoes.getSizeNum().toString());
                 }
-                list.add(hasHeel);
-                list.add(size);
+                list.put("productHeel", hasHeel);
+                list.put("productSizeNum", size);
                 break;
         }
 

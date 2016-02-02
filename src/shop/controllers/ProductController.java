@@ -7,18 +7,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import shop.Main;
-import shop.products.Catalog;
-import shop.products.Product;
-import shop.products.parameters.Currency;
-import shop.products.parameters.Gender;
-import shop.products.parameters.Price;
-import shop.products.parameters.Type;
+import shop.products.*;
+import shop.products.parameters.*;
 import shop.view.ViewGenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -38,6 +37,7 @@ public class ProductController implements Initializable {
     @FXML ComboBox<Type> productType;
     @FXML ComboBox<Gender> productGender;
     @FXML VBox additionalForm;
+    private LinkedHashMap<String, Control> additionalInfo;
     private static Product editedProduct = null;
     private Product product = null;
 
@@ -66,15 +66,36 @@ public class ProductController implements Initializable {
         System.out.println("creating new product");
         Product product = null;
         try {
+            Class cls = Class.forName("shop.products." + productType.getValue().toString());
             product = (Product) Class.forName("shop.products." + productType.getValue().toString()).newInstance();
-            System.out.println(product);
+            cls.cast(product);
         } catch (Exception e) {
             PopupController.alert(null, "Can not create instance of class " + productType.getValue(), e.getMessage());
             e.printStackTrace();
-        } finally {
-            //Catalog.add(product);
-            this.product = product;
         }
+
+        if (product instanceof Jacket) {
+            Jacket castedProduct = (Jacket) product;
+            this.product = castedProduct;
+            return castedProduct;
+        } else if (product instanceof Pants) {
+            Pants castedProduct = (Pants) product;
+            this.product = castedProduct;
+            return castedProduct;
+        } else if (product instanceof Shirt) {
+            Shirt castedProduct = (Shirt) product;
+            this.product = castedProduct;
+            return castedProduct;
+        } else if (product instanceof TShirt) {
+            TShirt castedProduct = (TShirt) product;
+            this.product = castedProduct;
+            return castedProduct;
+        } else if (product instanceof Shoes) {
+            Shoes castedProduct = (Shoes) product;
+            this.product = castedProduct;
+            return castedProduct;
+        }
+        this.product = product;
         return product;
     }
 
@@ -98,7 +119,8 @@ public class ProductController implements Initializable {
         System.out.println(productType.getValue());
         additionalForm.getChildren().clear();
         ViewGenerator generator = new ViewGenerator(this.getProduct());
-        additionalForm.getChildren().setAll(generator.generateForm(true));
+        additionalInfo = generator.generateForm(true);
+        additionalForm.getChildren().setAll(additionalInfo.values());
     }
 
     @FXML
@@ -142,6 +164,61 @@ public class ProductController implements Initializable {
             );
             product.setColor(productColor.getValue().toString());
             product.setGender(productGender.getValue());
+
+            Method[] methods = product.getClass().getMethods();
+            for (Method m : methods) {
+                switch (m.getName()) {
+                    case "setMaterial":
+                        m.invoke(product, this.getAdditionalValue("productMaterial"));
+                        break;
+                    case "setSize":
+                        m.invoke(product, this.getAdditionalValue("productSize"));
+                        break;
+                    case "setPromotion":
+                        if (this.getAdditionalText("productPromotionDiscount").isEmpty())
+                            break;
+                        Integer discount = Integer.parseInt(this.getAdditionalText("productPromotionDiscount"));
+                        LocalDate dateFrom = (LocalDate) this.getAdditionalValue("productPromotionDateFrom");
+                        LocalDate dateTo = (LocalDate) this.getAdditionalValue("productPromotionDateTo");
+                        m.invoke(product, new Promotion(discount, dateFrom, dateTo));
+                        break;
+                    case "setClasp":
+                        m.invoke(product, this.getAdditionalValue("productClasp"));
+                        break;
+                    case "setSeason":
+                        m.invoke(product, this.getAdditionalValue("productSeason"));
+                        break;
+                    case "setWidth":
+                        if (this.getAdditionalText("productWidth").isEmpty()) {
+                            throw new IOException("Please fill product width.");
+                        }
+                        Integer width = Integer.parseInt(this.getAdditionalText("productWidth"));
+                        m.invoke(product, width);
+                        break;
+                    case "setHeight":
+                        if (this.getAdditionalText("productHeight").isEmpty()) {
+                            throw new IOException("Please fill product height.");
+                        }
+                        Integer height = Integer.parseInt(this.getAdditionalText("productHeight"));
+                        m.invoke(product, height);
+                        break;
+                    case "setCollarSize":
+                        Integer collarSize = Integer.parseInt(this.getAdditionalText("productCollar"));
+                        m.invoke(product, collarSize);
+                        break;
+                    case "setTieIncluded":
+                        m.invoke(product, this.getAdditionalSelected("productTie"));
+                        break;
+                    case "setHasHeel":
+                        m.invoke(product, this.getAdditionalSelected("productHeel"));
+                        break;
+                    case "setSizeNum":
+                        Integer size = Integer.parseInt(this.getAdditionalText("productSizeNum"));
+                        m.invoke(product, size);
+                        break;
+                }
+            }
+
             Catalog.set(product);
             this.product = null;
             HomeController.getInstance().openProducts();
@@ -150,6 +227,25 @@ public class ProductController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public Object getAdditionalValue(String hash){
+        if (additionalInfo.get(hash) instanceof DatePicker) {
+            DatePicker object = (DatePicker) additionalInfo.get(hash);
+            return object.getValue();
+        } else {
+            ComboBox<Object> object = (ComboBox<Object>) additionalInfo.get(hash);
+            return object.getValue();
+        }
+    }
+    public String getAdditionalText(String hash){
+        TextField text = (TextField) additionalInfo.get(hash);
+        return text.getText();
+    }
+    public Boolean getAdditionalSelected(String hash){
+        CheckBox checkBox = (CheckBox) additionalInfo.get(hash);
+        return checkBox.isSelected();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
