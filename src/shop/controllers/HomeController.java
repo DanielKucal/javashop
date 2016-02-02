@@ -35,7 +35,12 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        this.setContent(new Text("test"));
+        Text welcome = new Text("Welcome to \nthe JavaShop!");
+        welcome.getStyleClass().add("welcome");
+        welcome.getStyleClass().add("centered");
+        AnchorPane.setLeftAnchor(welcome, 15.0);
+        AnchorPane.setTopAnchor(welcome, 120.0);
+        this.setContent(welcome, true);
         instance = this;
     }
 
@@ -78,7 +83,7 @@ public class HomeController implements Initializable {
 
     @FXML
     public void openCart(){
-        this.setContent(new Text("cart"));
+        this.setContent(new Text("nothing here"));
     }
 
     @FXML
