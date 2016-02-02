@@ -40,6 +40,7 @@ public class ProductController implements Initializable {
     private LinkedHashMap<String, Control> additionalInfo;
     private static Product editedProduct = null;
     private Product product = null;
+    private File file = null;
 
     public ProductController() {
 
@@ -130,16 +131,7 @@ public class ProductController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
-        File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
-        if(file != null){
-            File dest = new File("src/shop/resources/img/product" + Catalog.getLastProductId() + "." + getFileExtension(file));
-            try {
-                Files.copy(file.toPath(), dest.toPath());
-            } catch(IOException e) {
-                System.out.println("Can not copy " + file + " to " + dest);
-                e.printStackTrace();
-            }
-        }
+        this.file = fileChooser.showOpenDialog(Main.getPrimaryStage());
     }
 
     @FXML
@@ -216,6 +208,18 @@ public class ProductController implements Initializable {
                         Integer size = Integer.parseInt(this.getAdditionalText("productSizeNum"));
                         m.invoke(product, size);
                         break;
+                }
+            }
+
+            if(file != null){
+                File dest = new File("src/shop/resources/img/product" + product.getId() + "." + getFileExtension(file));
+                try {
+                    Files.copy(file.toPath(), dest.toPath());
+                } catch(IOException e) {
+                    System.out.println("Can not copy " + file + " to " + dest);
+                    e.printStackTrace();
+                } finally {
+                    this.file = null;
                 }
             }
 
