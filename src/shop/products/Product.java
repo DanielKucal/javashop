@@ -17,7 +17,7 @@ public abstract class Product {
     private String brand = "unknown company";
     private String color = null;
     private Gender gender = Gender.UNISEX;
-    private Integer id;
+    private Integer id = 0;
 
     Product(){
 
