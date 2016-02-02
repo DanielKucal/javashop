@@ -18,6 +18,11 @@ public class Promotion {
 
     }
 
+    @Override
+    public String toString(){
+        return discount + "% from " + dateFrom + " to " + dateTo;
+    }
+
     public Promotion(Integer discount, LocalDate dateFrom, LocalDate dateTo) {
         this.discount = discount;
         this.dateFrom = dateFrom;
