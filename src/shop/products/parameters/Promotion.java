@@ -18,6 +18,12 @@ public class Promotion {
 
     }
 
+    public Promotion(Integer discount, LocalDate dateFrom, LocalDate dateTo) {
+        this.discount = discount;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+    }
+
     public Integer getDiscount() {
         return discount;
     }
