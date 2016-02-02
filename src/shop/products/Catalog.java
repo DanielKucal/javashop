@@ -22,29 +22,30 @@ public class Catalog {
     private static Integer lastProductId = 0;
 
     public static TreeMap<Integer, Product> getProducts(){
-        if(!loaded) {
-            load();
-            loaded = true;
-        }
         return products;
     }
 
     private Catalog(){ }
 
     public static void load(){
-        try {
-            XMLDecoder decoder = new XMLDecoder(
-                    new BufferedInputStream(
-                            new FileInputStream(getFileName())
-                    )
-            );
-            products = (TreeMap<Integer, Product>) decoder.readObject();
-            lastProductId = products.lastEntry().getValue().getId()+1; //products.get(products.size()-1).getId();
-        } catch (Exception e) {
-            System.out.println("Can not read saved catalog data. Empty catalog instance will be used instead.");
-            e.printStackTrace();
-            products = new TreeMap<>();
+        if(!loaded) {
+            System.out.println("Loading product data...");
+            try {
+                XMLDecoder decoder = new XMLDecoder(
+                        new BufferedInputStream(
+                                new FileInputStream(getFileName())
+                        )
+                );
+                products = (TreeMap<Integer, Product>) decoder.readObject();
+                lastProductId = products.lastEntry().getValue().getId()+1;
+                System.out.println(products.size() + " products have been loaded.");
+            } catch (Exception e) {
+                System.out.println("Can not read saved catalog data. Empty catalog instance will be used instead.");
+                e.printStackTrace();
+                products = new TreeMap<>();
+            }
         }
+        loaded = true;
     }
 
     public static void save(){
@@ -74,7 +75,7 @@ public class Catalog {
         return lastProductId;
     }
 
-    public static void increaseLastProductId(){
+    private static void increaseLastProductId(){
         lastProductId++;
     }
 
@@ -93,7 +94,7 @@ public class Catalog {
     }
 
     public static void set(Product p) {
-        if (p.getId() == 0 || p.getId() == null) {
+        if (p.getId() == null || p.getId() == 0) {
             add(p);
             return;
         }

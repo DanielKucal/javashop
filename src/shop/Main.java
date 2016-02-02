@@ -6,12 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import shop.controllers.HomeController;
+import shop.products.Catalog;
 
 public class Main extends Application {
     private static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Catalog.load();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("view/main.fxml"));
         loader.setController(new HomeController());
         Parent root = loader.load();
