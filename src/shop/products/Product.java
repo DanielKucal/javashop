@@ -3,6 +3,7 @@ package shop.products;
 import javafx.scene.image.Image;
 import shop.products.parameters.Gender;
 import shop.products.parameters.Price;
+import java.io.File;
 
 /**
  * Created on 2015-11-13
@@ -57,15 +58,15 @@ public abstract class Product {
      * @return product's image
      */
     public Image getImage() {
+        if (image != null)
+            return image;
+        File file = new File("src/shop/resources/img/product" + getId() + ".png");
+        if (file.isFile()) {
+            image = new Image(file.toURI().toString());
+            return image;
+        }
+        image = new Image(new File("src/shop/resources/img/default.jpg").toURI().toString());
         return image;
-    }
-
-    /**
-     * Set product's image
-     * @param image new image for product
-     */
-    public void setImage(Image image) {
-        this.image = image;
     }
 
     /**
